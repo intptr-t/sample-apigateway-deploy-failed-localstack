@@ -1,0 +1,15 @@
+version: '3'
+services:
+  localstack:
+    container_name: example-container
+    image: localstack/localstack
+    ports:
+      - 4566:4566
+    environment:
+      - DATA_DIR=/tmp/localstack/data
+      - HOST_TMP_FOLDER=${TMPDIR}
+      - AWS_ACCESS_KEY_ID=local-id
+      - AWS_SECRET_ACCESS_KEY=local-secret
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      -  "../__localstack__:/tmp/localstack:rw"

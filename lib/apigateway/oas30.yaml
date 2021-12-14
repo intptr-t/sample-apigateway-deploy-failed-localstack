@@ -1,0 +1,18 @@
+openapi: "3.0.1"
+info:
+  title: "Example"
+  version: "2021-01-02T03:04:05Z"
+paths:
+  /test:
+    post:
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri:
+          Fn::Sub: arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${TestFunc.Arn}/invocations
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+
